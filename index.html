@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+	<head>
+		<meta charset="utf8">
+		<title>Apllet_Test</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	</head>
+
+<!-- -------------------------------------------------------------css_style_start------------------------------------------------------------- -->
+
+<style>
+body {
+    background-color: #2b2b2b;
+}
+
+h1 {
+color: #FFF;
+       font-weight:bold;
+}
+
+h3 {
+	font-size: 30px;
+	color: skyblue;
+	border-bottom: 3px solid skyblue;
+}
+
+/*
+   img {
+width:20%;
+max-width: 60%;
+height: auto;
+}*/
+
+.profile1 {
+float: left;
+width : 30% ;
+	max-width: 30%;
+height: auto;
+}
+
+.profile2 {
+float: left;
+}
+
+
+.tabs {
+
+    margin-top: 50px;
+    padding-bottom: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+margin: 0 auto;}
+
+.tab_item {
+width: calc(100%/3);
+height: 50px;
+	border-bottom: 3px solid skyblue;
+	background-color: white;
+	line-height: 50px;
+	font-size: 16px;
+	text-align: center;
+color: black;
+display: block;
+float: left;
+       text-align: center;
+       font-weight: bold;
+display: inline-block;
+	 background-image: linear-gradient(to right, rgba(0,0,0,0) 50%, skyblue 50%);
+	 background-position: 0 0;
+	 background-size: 200% auto;
+transition: all .3s ease 0s;
+	    text-decoration: none;
+}
+.tab_item:hover {
+opacity: 0.75;
+color: skyblue;
+cursor: pointer;
+	background-position: -100% 0;
+color: #fff;
+}
+
+
+input[name="tab_item"] {
+display: none;
+}
+
+.tab_content {
+display: none;
+padding: 40px 40px 0;
+clear: both;
+overflow: hidden;
+}
+
+
+#Home:checked ~ #Home_content,
+#Applet:checked ~ #Apllet_content,
+#How_to_play:checked ~ #How_to_play_content,
+#Future_plans:checked ~ #Future_plans_content{
+display: block;
+}
+
+
+.tabs input:checked + .tab_item {
+    background-color: skyblue;
+color: white;
+}
+
+@media screen and (min-width: 0px) and (max-width: 480px){
+
+  .tab_item {
+		width:100%;
+		height: 50px;
+		border-bottom: 3px solid skyblue;
+		background-color: white;
+		line-height: 50px;
+		font-size: 4vw;
+		text-align: center;
+		color: black;
+		display: block;
+		float: left;
+		text-align: center;
+		font-weight: bold;
+		display: inline-block;
+		background-image: linear-gradient(to right, rgba(0,0,0,0) 50%, skyblue 50%);
+		background-position: 0 0;
+		background-size: 200% auto;
+		transition: all .3s ease 0s;
+		text-decoration: none;
+	}
+}
+
+/*------------------button-------------------------*/
+
+.fill:hover,
+    .fill:focus {
+	box-shadow: inset 0 0 0 2em var(--hover);
+    }
+
+.pulse:hover,
+    .pulse:focus {
+animation: pulse 1s;
+	   box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+    }
+
+@keyframes pulse {
+    0% {
+	box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+.close:hover,
+    .close:focus {
+	box-shadow: inset -3.5em 0 0 0 var(--hover), inset 3.5em 0 0 0 var(--hover);
+    }
+
+.raise:hover,
+    .raise:focus {
+	box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+transform: translateY(-0.25em);
+    }
+
+.up:hover,
+    .up:focus {
+	box-shadow: inset 0 -3.25em 0 0 var(--hover);
+    }
+
+.slide:hover,
+    .slide:focus {
+	box-shadow: inset 15.0em 0 0 0 var(--hover);
+    }
+
+.offset {
+    box-shadow: 0.3em 0.3em 0 0 var(--color), inset 0.3em 0.3em 0 0 var(--color);
+}
+.offset:hover, .offset:focus {
+    box-shadow: 0 0 0 0 var(--hover), inset 6em 3.5em 0 0 var(--hover);
+}
+
+.fill {
+    --color: #a972cb;
+    --hover: #cb72aa;
+}
+
+.pulse {
+    --color: #ef6eae;
+    --hover: #ef8f6e;
+}
+
+.close {
+    --color: #ff7f82;
+    --hover: #ffdc7f;
+}
+
+.raise {
+    --color: #ffa260;
+    --hover: #e5ff60;
+}
+
+.up {
+    --color: #e4cb58;
+    --hover: #94e458;
+}
+
+.slide {
+    --color: hotpink;
+    --hover: hotpink;
+}
+
+.offset {
+    --color: #19bc8b;
+    --hover: #1973bc;
+}
+
+button {
+color: var(--color);
+transition: 0.25s;
+}
+button:hover, button:focus {
+	   border-color: var(--hover);
+color: #fff;
+       }
+
+button {
+background: none;
+border: 2px solid;
+font: inherit;
+      line-height: 1;
+margin: 0.5em;
+padding: 1em 2em;
+}
+</style>
+
+<!-- -------------------------------------------------------------css_style_end------------------------------------------------------------- -->
+
+  <body>
+	<h1>Applet_Test</h1>
+	<div class="tabs">
+		<input id="Home" type="radio" name="tab_item" checked>
+		<label class="tab_item" for="Home">Home</label>
+		<input id="Applet" type="radio" name="tab_item">
+		<label class="tab_item" for="Applet">Applet</label>
+		<input id="How_to_play" type="radio" name="tab_item">
+		<label class="tab_item" for="How_to_play">How to play</label>
+
+		<div class="tab_content" id="Home_content">
+			<p> 21番・篠田 裕人・テーマ19</p>
+			<h3>ユーザー向け解説</h3>
+			<p>サラリーマンがいろいろな感情を表しながら移動するアニメーションです。</p>
+			<p>特に操作はございません。</p>
+			<p>サラリーマンの喜怒哀楽をお楽しみください</p>
+			<h3>開発者向け解説</h3>
+			<p>感情が異なる四枚のサラリーマンが動くアニメーションです。</p>
+			<p>タイマーを使い100msごとにサラリーマンの画像を替え再描画しています。</p>
+			<div class="content">
+				<h3>ソースファイルへのリンク</h3>
+				<ul>
+					<li><a href="AnimetionApplet.java">AnimetionApplet.java</a></li>
+					<li><a href="AnimetionPanel.java">AnimetionPanel.java</a></li>
+				<ul>
+			</div>
+			<div class="content">
+				<h3>リンク切れリンク(jar証明)</h3>
+				<ul>
+					<li><a href="AnimetionApplet.class">AnimetionApplet.class</a></li>
+					<li><a href="AnimetionPanel.class">AnimetionPanel.class</a></li>
+					<li><a href="man0.png">man0.png</a></li>
+					<li><a href="man1.png">man1.png</a></li>
+					<li><a href="man2.png">man2.png</a></li>
+					<li><a href="man3.png">man3.png</a></li>
+				<ul>
+			</div>
+		</div>
+
+		<div class="tab_content" id="Apllet_content">
+			<h3>Applet</h3>
+			<applet code="AnimetionApplet.class" archive="p160101.jar" width="1280" height="720"></applet>
+		</div>
+
+		<div class="tab_content" id="How_to_play_content">
+			<h3>Control</h3>
+			<a>特になし</a>
+			<h3>Rule</h3>
+			<a>見るだけ</a>
+		</div>
+	</div>
+  </body>
+</html>

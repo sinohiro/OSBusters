@@ -5,7 +5,10 @@ public class PlayerBullet {
 
 	private MyModel mm;
 	private int x, y;
-	private int ex;
+	private int px, py;
+	private int ex, ey;
+	private int Hit;
+	private int NUM_BULLET;
 	private boolean isAlive;
 	private boolean isCollision;
 
@@ -13,12 +16,32 @@ public class PlayerBullet {
 		this.ex = ex;
 	}
 
+	public void setEnemyy(int ey){
+		this.ey = ey;
+	}
+
 	public void setIsCollision(boolean isCollision){
 		this.isCollision = isCollision;
 	}
 
+	public void setMyModel(MyModel mm){
+		this.mm = mm;
+	}
+
+	public void setNUM_BULLET(int NUM_BULLET){
+		this.NUM_BULLET = NUM_BULLET;
+	}
+
+	public int getCollisionx(){
+		return this.x;
+	}
+
+	public int getCollisiony(){
+		return this.y;
+	}
+
 	public PlayerBullet() {
-		this.mm = new MyModel();
+		Hit = 0;
 		isAlive = false;
 		isCollision = false;
 	}
@@ -32,7 +55,7 @@ public class PlayerBullet {
 	}
 
 	public void set(int x, int y) {
-		this.x = x + 79 / 2;
+		this.x = x + 100 / 2;
 		this.y = y + SPEED;
 		isAlive = true;
 	}
@@ -45,10 +68,16 @@ public class PlayerBullet {
 		}
 	}
 
+	public void init(int px, int py) {
+		this.x = px;
+		this.y = py;
+	}
+
 	public void CollisionDetection() {
 		//if (this.x > this.ex && this.x < this.ex + 79 && this.y < 20 + 79 && this.y > 20){
-		if (isAlive == true && this.x > this.ex && this.x < this.ex + 79 && this.y < 20){
-			System.out.println("Hit");
+		if (isAlive == true && this.x > this.ex && this.x < this.ex + 100 && this.y < this.ey + 100 && this.y > this.ey){
+			Hit += 1;
+			System.out.println("Hit x-> " + this.x + " y -> " + this.y);
 			isCollision = true;
 			isAlive = false;
 		} else {

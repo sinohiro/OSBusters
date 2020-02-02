@@ -18,6 +18,8 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 	private JButton selenemybutton1;
 	private JButton selenemybutton2;
 	private JButton startbutton;
+	private JButton goSelmenubutton;
+	private JLabel selmenulabel;
 	private CardLayout layout;
 	private MyPanel mp;
 	private MyModel mm;
@@ -51,7 +53,12 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		this.selenemybutton0 = new JButton(apple_icon);
 		this.selenemybutton1 = new JButton(linux_icon);
 		this.selenemybutton2 = new JButton(windows_icon);
-		this.startbutton = new JButton("Start");
+		this.startbutton = new JButton("GameStart");
+		this.startbutton.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 32));
+		this.goSelmenubutton = new JButton("Start");
+		this.goSelmenubutton.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 32));
+		this.selmenulabel = new JLabel("Select Player & Enemy");
+		this.selmenulabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 40));
 		px = 640;
 		py = 600;
 		point = 0;
@@ -64,6 +71,7 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		this.kleft = this.kright = false;
 		isLeft = isRight = isUp = isDown = isShot = false;
 		timer = new Timer(40, this);
+		this.timer.stop();
 		this.mm = new MyModel();
 		this.mp = new MyPanel(px, py);
 		this.pb = new PlayerBullet[NUM_BULLET];
@@ -85,6 +93,7 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		mp.setNUM_BULLET(NUM_BULLET);
 		mp.setNUM_ENEMY(NUM_ENEMY);
 		mp.setMyModel(this.mm);
+		title.setMyModel(this.mm);
 
 		mp.addKeyListener(this);
 
@@ -105,11 +114,16 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		selbutton.add(selplayer);
 		selbutton.add(selenemy);
 
+		JPanel selmenu = new JPanel();
+		selmenu.setLayout(new BorderLayout());
+		selmenu.add("North", selmenulabel);
+		selmenu.add("Center", selbutton);
+		selmenu.add("South", this.startbutton);
+
 		JPanel titlePanel = new JPanel();
-		//title.add(this.title);
-		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
-		titlePanel.add(selbutton);
-		titlePanel.add(this.startbutton);
+		titlePanel.setLayout(new BorderLayout());
+		titlePanel.add("North", this.title);
+		titlePanel.add("South", this.goSelmenubutton);
 
 		JPanel field = new JPanel();
 		field.setLayout(new BoxLayout(field, BoxLayout.PAGE_AXIS));
@@ -119,6 +133,7 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		layout = new CardLayout();
 		cardPanel.setLayout(layout);
 		cardPanel.add(titlePanel, "title");
+		cardPanel.add(selmenu, "selmenu");
 		cardPanel.add(field, "game");
 
 		getContentPane().add(cardPanel);
@@ -130,6 +145,7 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		this.selenemybutton1.addActionListener(this);
 		this.selenemybutton2.addActionListener(this);
 		this.startbutton.addActionListener(this);
+		this.goSelmenubutton.addActionListener(this);
 	}
 
 	public void playermove() {
@@ -179,10 +195,12 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 			mm.setEnemyImage(2);
 		}
 		if (e.getSource() == this.startbutton) {
-			layout.next(cardPanel);
+			layout.show(cardPanel, "game");
 			this.timer.start();
 		}
-
+		if (e.getSource() == this.goSelmenubutton) {
+			layout.show(cardPanel, "selmenu");
+		}
 
 	//flame_count
 		flame += 1;
@@ -268,6 +286,8 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 			case KeyEvent.VK_SPACE:
 				isShot = true;
 				break;
+			case KeyEvent.VK_ESCAPE:
+				layout.show(cardPanel, "title");
 		}
 		this.mp.repaint();
 	}

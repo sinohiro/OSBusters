@@ -40,7 +40,7 @@ public class MyModel {
 		windows_logo = tk.getImage("image/windows_logo.png");
 		bullet = tk.getImage("man2.png");
 		explosion = tk.getImage("image/explosion.png");
-		title = tk.getImage("image/title.png");
+		title = tk.getImage("image/title/OSBustersTitleImage3.png");
 		ELeft = false;
 		ERight = true;
 		enemykill = false;

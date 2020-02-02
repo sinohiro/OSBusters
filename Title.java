@@ -4,10 +4,14 @@ import javax.swing.*;
 public class Title extends JPanel {
 	private MyModel mm;
 
+	public void setMyModel(MyModel mm){
+		this.mm = mm;
+	}
+
 	public Title() {
-		this.mm = new MyModel();
 		setBackground(Color.black);
 		setPreferredSize(new Dimension(1280, 720));
+		setOpaque(false);
 	}
 
 	public void paintComponent(Graphics g) {

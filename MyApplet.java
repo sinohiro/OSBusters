@@ -8,7 +8,7 @@ import java.net.*;
 public class MyApplet extends JApplet implements KeyListener, ActionListener {
 
 	private static final int NUM_BULLET = 100;
-	private static final int NUM_ENEMY = 2;
+	private static final int NUM_ENEMY = 20;
 
 	private JPanel cardPanel;
 	private JButton selplayerbutton0;
@@ -29,7 +29,9 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 	private ImageIcon apple_icon = new ImageIcon("image/apple_logo.png");
 	private ImageIcon linux_icon = new ImageIcon("image/linux_logo.png");
 	private ImageIcon windows_icon = new ImageIcon("image/windows_logo.png");
-	private int px, py, ex, ey;
+	private int px, py;
+	private int[] ex;
+	private int[] ey;
 	private int cbulletx, cbullety;
 	private int cenemyx, cenemyy;
 	private int point;
@@ -57,6 +59,8 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		cbulletx = cbullety = 0;
 		cenemyx = cenemyy = 0;
 		ExprosionTime = 0;
+		this.ex = new int[NUM_ENEMY];
+		this.ey = new int[NUM_ENEMY];
 		this.kleft = this.kright = false;
 		isLeft = isRight = isUp = isDown = isShot = false;
 		timer = new Timer(40, this);
@@ -66,7 +70,7 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		for (int i = 0 ; i < NUM_BULLET ; i++){
 			pb[i] = new PlayerBullet();
 			pb[i].setMyModel(this.mm);
-			pb[i].setNUM_BULLET(NUM_BULLET);
+			pb[i].setNUM_ENEMY(NUM_ENEMY);
 		}
 
 		this.enemy = new Enemy[NUM_ENEMY];
@@ -193,11 +197,11 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 			if (enemy[i].isAlive()){
 				enemy[i].move();
 			}
-			ex = enemy[i].getEnemyx();
-			ey = enemy[i].getEnemyy();
+			ex[i] = enemy[i].getEnemyx();
+			ey[i] = enemy[i].getEnemyy();
 			mp.setEnemyx(ex);
 			mp.setEnemyy(ey);
-			}
+		}
 
 		//playerbulletmove
 		for (int i = 0; i < NUM_BULLET; i++) {
@@ -205,10 +209,9 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 				pb[i].setEnemyx(ex);
 				pb[i].setEnemyy(ey);
 				pb[i].move();
-				pb[i].CollisionDetection();
-			}else{
-				pb[i].init(px, py);
 			}
+			pb[i].setNUM_ENEMY(NUM_ENEMY);
+			pb[i].CollisionDetection();
 		}
 
 		//playerbulletcollision
@@ -229,11 +232,12 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 			cenemyy = enemy[i].getEnemyy();
 			if (cenemyx < cbulletx && cbulletx < cenemyx + 100 && cenemyy < cbullety && cbullety < cenemyy + 100){
 				enemy[i].setIsCollision(true);
+				cbulletx = cbullety = 0;
 			}
 		}
 		//Exprosion_prosess
 		if (mp.getIsExplosion()) {
-			if ((flame % 40) == 0) {
+			if ((flame % 20) == 0) {
 				for (int i = 0; i < NUM_ENEMY; i++){
 					if(enemy[i].isCollision()){
 						enemy[i].setExprosionTime();

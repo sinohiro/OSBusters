@@ -6,17 +6,17 @@ public class PlayerBullet {
 	private MyModel mm;
 	private int x, y;
 	private int px, py;
-	private int ex, ey;
+	private int[] ex, ey;
 	private int Hit;
-	private int NUM_BULLET;
+	private int NUM_ENEMY;
 	private boolean isAlive;
 	private boolean isCollision;
 
-	public void setEnemyx(int ex){
+	public void setEnemyx(int[] ex){
 		this.ex = ex;
 	}
 
-	public void setEnemyy(int ey){
+	public void setEnemyy(int[] ey){
 		this.ey = ey;
 	}
 
@@ -28,8 +28,8 @@ public class PlayerBullet {
 		this.mm = mm;
 	}
 
-	public void setNUM_BULLET(int NUM_BULLET){
-		this.NUM_BULLET = NUM_BULLET;
+	public void setNUM_ENEMY(int NUM_ENEMY){
+		this.NUM_ENEMY = NUM_ENEMY;
 	}
 
 	public int getCollisionx(){
@@ -74,14 +74,13 @@ public class PlayerBullet {
 	}
 
 	public void CollisionDetection() {
-		//if (this.x > this.ex && this.x < this.ex + 79 && this.y < 20 + 79 && this.y > 20){
-		if (isAlive == true && this.x > this.ex && this.x < this.ex + 100 && this.y < this.ey + 100 && this.y > this.ey){
-			Hit += 1;
-			System.out.println("Hit x-> " + this.x + " y -> " + this.y);
-			isCollision = true;
-			isAlive = false;
-		} else {
-			isCollision = false;
+		for (int i = 0; i < NUM_ENEMY; i++){
+			if (isAlive == true && this.x > this.ex[i] && this.x < this.ex[i] + 100 && this.y < this.ey[i] + 100 && this.y > this.ey[i]){
+				Hit += 1;
+				System.out.println("Enemy[" + i + "] " + " Hit -> " + Hit + " x-> " + this.x + " y -> " + this.y);
+				isCollision = true;
+				isAlive = false;
+			}
 		}
 	}
 

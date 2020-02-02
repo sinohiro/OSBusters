@@ -92,10 +92,6 @@ public class Enemy {
 		}else {
 			ERight = true;
 		}
-		/*for (int i = 0; i < NUM_BULLET; i++){
-
-			pb[i].setEnemyx(ex);
-		}*/
 	}
 
 	public void draw(Graphics g) {

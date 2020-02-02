@@ -8,7 +8,7 @@ public class MyPanel extends JPanel {
 	private PlayerBullet[] pb;
 	private Enemy[] enemy;
 	private int px, py;
-	private int ex, ey;
+	private int[] ex, ey;
 	private int NUM_BULLET;
 	private int NUM_ENEMY;
 	private int point;
@@ -22,11 +22,11 @@ public class MyPanel extends JPanel {
 		this.py = py;
 	}
 
-	public void setEnemyx(int ex){
+	public void setEnemyx(int[] ex){
 		this.ex = ex;
 	}
 
-	public void setEnemyy(int ey){
+	public void setEnemyy(int[] ey){
 		this.ey = ey;
 	}
 
@@ -91,9 +91,6 @@ public class MyPanel extends JPanel {
 		String point = String.valueOf(this.point);
 		//Playerpoint
 		g.drawString("Point: " + point, 10, 50);
-
-		//old_enemy
-		//g.drawImage(mm.getEnemy(), this.ex, this.ey, this);
 
 		for (int i = 0; i < NUM_ENEMY; i++) {
 			if (enemy[i].isAlive()){

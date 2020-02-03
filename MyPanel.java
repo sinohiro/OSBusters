@@ -13,6 +13,16 @@ public class MyPanel extends JPanel {
 	private int NUM_ENEMY;
 	private int point;
 	private boolean isExprosion;
+	private Image playerimage;
+	private Image explosionimage;
+
+	public void setPlayerImage(Image playerimage){
+		this.playerimage = playerimage;
+	}
+
+	public void setExplosionImage(Image explosionimage){
+		this.explosionimage = explosionimage;
+	}
 
 	public void setPlayerx(int px){
 		this.px = px;
@@ -80,7 +90,7 @@ public class MyPanel extends JPanel {
 		//borderLine
 		g.drawLine(0, 360, 1280, 360);
 		//player
-		g.drawImage(mm.getPlayer(), this.px, this.py, this);
+		g.drawImage(this.playerimage, this.px, this.py, this);
 
 		//playerbullet
 		for (int i = 0; i < NUM_BULLET; i++) {
@@ -90,6 +100,7 @@ public class MyPanel extends JPanel {
 		}
 		String point = String.valueOf(this.point);
 		//Playerpoint
+		g.setFont(new Font("ＭＳ ゴシック",Font.PLAIN,30));
 		g.drawString("Point: " + point, 10, 50);
 
 		for (int i = 0; i < NUM_ENEMY; i++) {
@@ -102,7 +113,7 @@ public class MyPanel extends JPanel {
 		for (int i = 0; i < NUM_ENEMY; i++){
 			if (enemy[i].isCollision()) {
 				//System.out.println("Exprosion!! x-> " + enemy[i].getEnemyx() + "y -> " + enemy[i].getEnemyy());
-				g.drawImage(mm.getExplosion(), enemy[i].getEnemyx(), enemy[i].getEnemyy(), this);
+				g.drawImage(this.explosionimage, enemy[i].getEnemyx(), enemy[i].getEnemyy(), this);
 			}
 		}
 		requestFocusInWindow();

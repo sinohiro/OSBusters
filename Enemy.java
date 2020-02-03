@@ -4,7 +4,6 @@ import java.awt.Image;
 
 public class Enemy {
 
-	private MyModel mm;
 	private PlayerBullet[] pb;
 	private int ex, ey;
 	private int ExprosionTime;
@@ -13,6 +12,12 @@ public class Enemy {
 	private boolean isCollision;
 	private boolean ERight; //EnemyRight
 	private boolean ELeft;
+	private Image enemyimage;
+	private Image explosionimage;
+
+	public void setExplosionImage(Image explosionimage){
+		this.explosionimage = explosionimage;
+	}
 
 	public void setEnemyx(int ex){
 		this.ex = ex;
@@ -31,8 +36,8 @@ public class Enemy {
 		}
 	}
 
-	public void setMyModel(MyModel mm){
-		this.mm = mm;
+	public void setEnemyImage(Image enemyimage){
+		this.enemyimage = enemyimage;
 	}
 
 	public void setNUM_BULLET(int NUM_BULLET){
@@ -95,11 +100,11 @@ public class Enemy {
 	}
 
 	public void draw(Graphics g) {
-		g.drawImage(mm.getEnemy(), this.ex, this.ey, null);
+		g.drawImage(this.enemyimage, this.ex, this.ey, null);
 	}
 
 	public void exprosiondraw(Graphics g) {
-		g.drawImage(mm.getEnemy(), this.ex, this.ey, null);
+		g.drawImage(this.explosionimage, this.ex, this.ey, null);
 	}
 
 }

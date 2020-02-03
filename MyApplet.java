@@ -20,6 +20,8 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 	private JButton startbutton;
 	private JButton goSelmenubutton;
 	private JLabel selmenulabel;
+	private JLabel selmenuplayerlabel;
+	private JLabel selmenuenemylabel;
 	private CardLayout layout;
 	private MyPanel mp;
 	private MyModel mm;
@@ -39,12 +41,28 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 	private int point;
 	private int flame;
 	private int ExprosionTime;
+	private String selplayerimage;
+	private String selenemyimage;
 	private boolean kleft, kright;
 	private boolean isLeft;
 	private boolean isRight;
 	private boolean isUp;
 	private boolean isDown;
 	private boolean isShot;
+	private Image playerimage;
+	private Image enemyimage;
+	private Image explosionimage;
+	private Image titleimage;
+	private Image apple_logo;
+	private Image linux_logo;
+	private Image windows_logo;
+	private URL urlplayerimage;
+	private URL urlenemyimage;
+	private URL urlexplosionimage;
+	private URL urltitleimage;
+	private URL urlapple_logo;
+	private URL urllinux_logo;
+	private URL urlwindows_logo;
 
 	public void init() {
 		this.selplayerbutton0 = new JButton(apple_icon);
@@ -58,7 +76,11 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		this.goSelmenubutton = new JButton("Start");
 		this.goSelmenubutton.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 32));
 		this.selmenulabel = new JLabel("Select Player & Enemy");
-		this.selmenulabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 40));
+		this.selmenulabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 50));
+		this.selmenuplayerlabel = new JLabel("Select Player");
+		this.selmenuplayerlabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 40));
+		this.selmenuenemylabel = new JLabel("Select Enemy");
+		this.selmenuenemylabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 40));
 		px = 640;
 		py = 600;
 		point = 0;
@@ -72,6 +94,23 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		isLeft = isRight = isUp = isDown = isShot = false;
 		timer = new Timer(40, this);
 		this.timer.stop();
+
+		urlplayerimage = MyApplet.class.getResource("image/linux_logo.png");
+		urlenemyimage = MyApplet.class.getResource("image/windows_logo.png");
+		urlexplosionimage = MyApplet.class.getResource("image/explosion.png");
+		urltitleimage = MyApplet.class.getResource("image/title/OSBustersTitleImage3.png");
+		urlapple_logo = MyApplet.class.getResource("image/apple_logo.png");
+		urllinux_logo = MyApplet.class.getResource("image/linux_logo.png");
+		urlwindows_logo = MyApplet.class.getResource("image/windows_logo.png");
+
+		this.playerimage = super.getImage(urlplayerimage);
+		this.enemyimage = super.getImage(urlenemyimage);
+		this.explosionimage = super.getImage(urlexplosionimage);
+		this.titleimage = super.getImage(urltitleimage);
+		this.apple_logo = super.getImage(urlapple_logo);
+		this.linux_logo = super.getImage(urllinux_logo);
+		this.windows_logo = super.getImage(urlwindows_logo);
+
 		this.mm = new MyModel();
 		this.mp = new MyPanel(px, py);
 		this.pb = new PlayerBullet[NUM_BULLET];
@@ -84,9 +123,14 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		this.enemy = new Enemy[NUM_ENEMY];
 		for (int i = 0 ; i < NUM_ENEMY ; i++){
 			enemy[i] = new Enemy();
-			enemy[i].setMyModel(this.mm);
+			enemy[i].setEnemyImage(enemyimage);
+			enemy[i].setExplosionImage(explosionimage);
 		}
 		this.title = new Title();
+
+		//set_image
+		mp.setPlayerImage(playerimage);
+		mp.setExplosionImage(explosionimage);
 
 		mp.setPlayerBullet(pb);
 		mp.setEnemy(enemy);
@@ -111,14 +155,21 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 
 		JPanel selbutton = new JPanel();
 		selbutton.setLayout(new BoxLayout(selbutton, BoxLayout.Y_AXIS));
+		selbutton.add(selmenuplayerlabel);
 		selbutton.add(selplayer);
+		selbutton.add(selmenuenemylabel);
 		selbutton.add(selenemy);
+
+		JPanel controlinfo = new JPanel();
+		controlinfo.setLayout(new BoxLayout(selbutton, BoxLayout.Y_AXIS));
+
 
 		JPanel selmenu = new JPanel();
 		selmenu.setLayout(new BorderLayout());
 		selmenu.add("North", selmenulabel);
 		selmenu.add("Center", selbutton);
 		selmenu.add("South", this.startbutton);
+		selmenu.add("East", controlinfo);
 
 		JPanel titlePanel = new JPanel();
 		titlePanel.setLayout(new BorderLayout());
@@ -177,24 +228,51 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.selplayerbutton0) {
-			mm.setPlayerImage(0);
+			this.selmenuplayerlabel.setText("Player: MacOS");
+			URL urlplayerimage = MyApplet.class.getResource("image/apple_logo.png");
+			this.playerimage =  super.getImage(urlplayerimage);
+			mp.setPlayerImage(playerimage);
 		}
 		if (e.getSource() == this.selplayerbutton1) {
-			mm.setPlayerImage(1);
+			this.selmenuplayerlabel.setText("Player: Linux");
+			URL urlplayerimage = MyApplet.class.getResource("image/linux_logo.png");
+			this.playerimage =  super.getImage(urlplayerimage);
+			mp.setPlayerImage(playerimage);
 		}
 		if (e.getSource() == this.selplayerbutton2) {
-			mm.setPlayerImage(2);
+			this.selmenuplayerlabel.setText("Player: Windows");
+			URL urlplayerimage = MyApplet.class.getResource("image/windows_logo.png");
+			this.playerimage =  super.getImage(urlplayerimage);
+			mp.setPlayerImage(playerimage);
 		}
 		if (e.getSource() == this.selenemybutton0) {
-			mm.setEnemyImage(0);
+			this.selmenuenemylabel.setText("Enemy: MacOS");
+			URL urlenemyimage = MyApplet.class.getResource("image/apple_logo.png");
+			this.enemyimage =  super.getImage(urlenemyimage);
+			for (int i = 0; i < NUM_ENEMY; i++){
+				enemy[i].setEnemyImage(enemyimage);
+			}
 		}
 		if (e.getSource() == this.selenemybutton1) {
-			mm.setEnemyImage(1);
+			this.selmenuenemylabel.setText("Enemy: Linux");
+			URL urlenemyimage = MyApplet.class.getResource("image/linux_logo.png");
+			this.enemyimage =  super.getImage(urlenemyimage);
+			for (int i = 0; i < NUM_ENEMY; i++){
+				enemy[i].setEnemyImage(enemyimage);
+			}
 		}
 		if (e.getSource() == this.selenemybutton2) {
-			mm.setEnemyImage(2);
+			this.selmenuenemylabel.setText("Enemy: Windows");
+			URL urlenemyimage = MyApplet.class.getResource("image/windows_logo.png");
+			this.enemyimage =  super.getImage(urlenemyimage);
+			for (int i = 0; i < NUM_ENEMY; i++){
+				enemy[i].setEnemyImage(enemyimage);
+			}
 		}
 		if (e.getSource() == this.startbutton) {
+			isShot = false;
+			point = 0;
+			mp.setPoint(point);
 			layout.show(cardPanel, "game");
 			this.timer.start();
 		}
@@ -287,6 +365,8 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 				isShot = true;
 				break;
 			case KeyEvent.VK_ESCAPE:
+				this.selmenuplayerlabel.setText("Select Player");
+				this.selmenuenemylabel.setText("Select Enemy");
 				layout.show(cardPanel, "title");
 		}
 		this.mp.repaint();

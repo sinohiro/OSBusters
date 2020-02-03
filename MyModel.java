@@ -6,8 +6,6 @@ import java.net.*;
 
 public class MyModel {
 
-	private int selplayerimage;
-	private int selenemyimage;
 	private boolean kleft;  //keyLeft
 	private boolean kright;
 	private boolean ERight; //EnemyRight
@@ -22,7 +20,7 @@ public class MyModel {
 	private Image linux_logo;
 	private Image windows_logo;
 
-	public void setPlayerImage(int selplayerimage){
+	/*public void setPlayerImage(int selplayerimage){
 		System.out.println("selPlayer -> " + selplayerimage);
 		this.selplayerimage = selplayerimage;
 	}
@@ -30,7 +28,7 @@ public class MyModel {
 	public void setEnemyImage(int selenemyimage){
 		System.out.println("selenemy -> " + selenemyimage);
 		this.selenemyimage = selenemyimage;
-	}
+	}*/
 
 	public MyModel(){
 		super();
@@ -110,37 +108,6 @@ public class MyModel {
 	}
 	public Image getWindowsLogo(){
 		return this.windows_logo;
-	}
-
-	public Image getPlayer(){
-		switch (selplayerimage){
-			case 0:
-				playerimage = this.apple_logo;
-				break;
-			case 1:
-				playerimage = this.linux_logo;
-				break;
-			case 2:
-				playerimage = this.windows_logo;
-				break;
-		}
-		return playerimage;
-	}
-
-	public Image getEnemy(){
-		switch (selenemyimage){
-			case 0:
-				enemyimage = this.apple_logo;
-				break;
-			case 1:
-				enemyimage = this.linux_logo;
-				break;
-			case 2:
-				enemyimage = this.windows_logo;
-				break;
-		}
-		return enemyimage;
-
 	}
 
 	public Image getPlayerBullet(){

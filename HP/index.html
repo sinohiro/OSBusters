@@ -3,7 +3,7 @@
 <html lang="ja">
 	<head>
 		<meta charset="utf8">
-		<title>Apllet_Test</title>
+		<title>OSBustersHP</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	</head>
 
@@ -21,8 +21,8 @@ color: #FFF;
 
 h3 {
 	font-size: 30px;
-	color: skyblue;
-	border-bottom: 3px solid skyblue;
+	color: orangered;
+	border-bottom: 3px solid orangered;
 }
 
 /*
@@ -55,7 +55,7 @@ margin: 0 auto;}
 .tab_item {
 width: calc(100%/3);
 height: 50px;
-	border-bottom: 3px solid skyblue;
+	border-bottom: 3px solid orangered;
 	background-color: white;
 	line-height: 50px;
 	font-size: 16px;
@@ -66,7 +66,7 @@ float: left;
        text-align: center;
        font-weight: bold;
 display: inline-block;
-	 background-image: linear-gradient(to right, rgba(0,0,0,0) 50%, skyblue 50%);
+	 background-image: linear-gradient(to right, rgba(0,0,0,0) 50%, orangered 50%);
 	 background-position: 0 0;
 	 background-size: 200% auto;
 transition: all .3s ease 0s;
@@ -74,7 +74,7 @@ transition: all .3s ease 0s;
 }
 .tab_item:hover {
 opacity: 0.75;
-color: skyblue;
+color: orangered;
 cursor: pointer;
 	background-position: -100% 0;
 color: #fff;
@@ -102,7 +102,7 @@ display: block;
 
 
 .tabs input:checked + .tab_item {
-    background-color: skyblue;
+    background-color: orangered;
 color: white;
 }
 
@@ -111,7 +111,7 @@ color: white;
   .tab_item {
 		width:100%;
 		height: 50px;
-		border-bottom: 3px solid skyblue;
+		border-bottom: 3px solid orangered;
 		background-color: white;
 		line-height: 50px;
 		font-size: 4vw;
@@ -122,7 +122,7 @@ color: white;
 		text-align: center;
 		font-weight: bold;
 		display: inline-block;
-		background-image: linear-gradient(to right, rgba(0,0,0,0) 50%, skyblue 50%);
+		background-image: linear-gradient(to right, rgba(0,0,0,0) 50%, orangered 50%);
 		background-position: 0 0;
 		background-size: 200% auto;
 		transition: all .3s ease 0s;
@@ -233,7 +233,7 @@ padding: 1em 2em;
 <!-- -------------------------------------------------------------css_style_end------------------------------------------------------------- -->
 
   <body>
-	<h1>Applet_Test</h1>
+	<h1>OSBusters</h1>
 	<div class="tabs">
 		<input id="Home" type="radio" name="tab_item" checked>
 		<label class="tab_item" for="Home">Home</label>
@@ -245,12 +245,15 @@ padding: 1em 2em;
 		<div class="tab_content" id="Home_content">
 			<p> 21番・篠田 裕人・テーマ19</p>
 			<h3>ユーザー向け解説</h3>
-			<p>サラリーマンがいろいろな感情を表しながら移動するアニメーションです。</p>
-			<p>特に操作はございません。</p>
-			<p>サラリーマンの喜怒哀楽をお楽しみください</p>
+			<p>世界的に使われているパソコンのOS(オペレーティングシステム)同士が戦うゲームです。</p>
+			<p>制作時間の都合上、ゲームクリア概念は存在していませんので自分の嫌いなOSをBusterできて満足したと思ったらやめてください。</p>
+			<p>操作方法は「How to play」を参照してください。</p>
 			<h3>開発者向け解説</h3>
-			<p>感情が異なる四枚のサラリーマンが動くアニメーションです。</p>
-			<p>タイマーを使い100msごとにサラリーマンの画像を替え再描画しています。</p>
+			<p>OSのロゴマークを動かして自分の好きなOSロゴを動かし敵のOSロゴを爆破するゲームです</p>
+			<p>keylisnerを使用し該当のキーが入力されると自OSロゴのxy座標を変え、再描画しています。</p>
+			<p>タイマーを使用し40msごとに敵のロゴマークのx座標を変え、再描画しています。</p>
+			<p>敵のOSからの攻撃も実装したかったです</p>
+			<p>ゲームクリア概念が存在していないので実装したかったです</p>
 			<div class="content">
 				<h3>ソースファイルへのリンク</h3>
 				<ul>
@@ -273,7 +276,8 @@ padding: 1em 2em;
 
 		<div class="tab_content" id="Apllet_content">
 			<h3>Applet</h3>
-			<applet code="AnimetionApplet.class" archive="p160101.jar" width="1280" height="720"></applet>
+			<p>本来は下にゲームが表示されるのですがJavaAplletはセキュリティー上問題があるため、2015年くらいからwebで表示できないようになりました</p>
+			<applet code="MyApplet.class" archive="p160101.jar" width="1280" height="720"></applet>
 		</div>
 
 		<div class="tab_content" id="How_to_play_content">

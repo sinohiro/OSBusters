@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.Timer;
-import java.awt.MediaTracker;
 import java.net.*;
 
 public class MyApplet extends JApplet implements KeyListener, ActionListener {
@@ -162,14 +161,14 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 
 		JPanel controlinfo = new JPanel();
 		controlinfo.setLayout(new BoxLayout(selbutton, BoxLayout.Y_AXIS));
-
+		//時間足りない
 
 		JPanel selmenu = new JPanel();
 		selmenu.setLayout(new BorderLayout());
 		selmenu.add("North", selmenulabel);
 		selmenu.add("Center", selbutton);
 		selmenu.add("South", this.startbutton);
-		selmenu.add("East", controlinfo);
+		//selmenu.add("East", controlinfo);
 
 		JPanel titlePanel = new JPanel();
 		titlePanel.setLayout(new BorderLayout());
@@ -187,7 +186,7 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		cardPanel.add(selmenu, "selmenu");
 		cardPanel.add(field, "game");
 
-		getContentPane().add(cardPanel);
+		getContentPane().add(cardPanel, BorderLayout.CENTER);
 
 		this.selplayerbutton0.addActionListener(this);
 		this.selplayerbutton1.addActionListener(this);

@@ -20,16 +20,6 @@ public class MyModel {
 	private Image linux_logo;
 	private Image windows_logo;
 
-	/*public void setPlayerImage(int selplayerimage){
-		System.out.println("selPlayer -> " + selplayerimage);
-		this.selplayerimage = selplayerimage;
-	}
-
-	public void setEnemyImage(int selenemyimage){
-		System.out.println("selenemy -> " + selenemyimage);
-		this.selenemyimage = selenemyimage;
-	}*/
-
 	public MyModel(){
 		super();
 		Toolkit tk = Toolkit.getDefaultToolkit();

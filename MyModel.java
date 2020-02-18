@@ -21,14 +21,6 @@ public class MyModel {
 	private Image windows_logo;
 
 	public MyModel(){
-		super();
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		apple_logo = tk.getImage("image/apple_logo.png");
-		linux_logo = tk.getImage("image/linux_logo.png");
-		windows_logo = tk.getImage("image/windows_logo.png");
-		bullet = tk.getImage("man2.png");
-		explosion = tk.getImage("image/explosion.png");
-		title = tk.getImage("image/title/OSBustersTitleImage3.png");
 		ELeft = false;
 		ERight = true;
 		enemykill = false;
@@ -88,28 +80,6 @@ public class MyModel {
 	public int getPoint(int point){
 		point += 1;
 		return point;
-	}
-
-	public Image getAppleLogo(){
-		return this.apple_logo;
-	}
-	public Image getLinuxLogo(){
-		return this.linux_logo;
-	}
-	public Image getWindowsLogo(){
-		return this.windows_logo;
-	}
-
-	public Image getPlayerBullet(){
-		return this.bullet;
-	}
-
-	public Image getExplosion(){
-		return this.explosion;
-	}
-
-	public Image getTitleImage(){
-		return this.title;
 	}
 }
 

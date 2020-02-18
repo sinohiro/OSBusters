@@ -29,9 +29,9 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 	private Title title;
 	private Image player;
 	private Timer timer;
-	private ImageIcon apple_icon = new ImageIcon("image/apple_logo.png");
-	private ImageIcon linux_icon = new ImageIcon("image/linux_logo.png");
-	private ImageIcon windows_icon = new ImageIcon("image/windows_logo.png");
+	private ImageIcon apple_icon;
+	private ImageIcon linux_icon;
+	private ImageIcon windows_icon;
 	private int px, py;
 	private int[] ex;
 	private int[] ey;
@@ -55,15 +55,46 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 	private Image apple_logo;
 	private Image linux_logo;
 	private Image windows_logo;
-	private URL urlplayerimage;
-	private URL urlenemyimage;
-	private URL urlexplosionimage;
-	private URL urltitleimage;
-	private URL urlapple_logo;
-	private URL urllinux_logo;
-	private URL urlwindows_logo;
+	private MediaTracker tracker;
 
 	public void init() {
+		this.tracker = new MediaTracker(this);
+		this.title = new Title();
+		URL urlplayerimage = MyApplet.class.getResource("image/linux_logo.png");
+		URL urlenemyimage = MyApplet.class.getResource("image/windows_logo.png");
+		URL urlexplosionimage = MyApplet.class.getResource("image/explosion.png");
+		URL urltitleimage = MyApplet.class.getResource("image/title/OSBustersTitleImage3.png");
+		URL urlapple_logo = MyApplet.class.getResource("image/apple_logo.png");
+		URL urllinux_logo = MyApplet.class.getResource("image/linux_logo.png");
+		URL urlwindows_logo = MyApplet.class.getResource("image/windows_logo.png");
+
+		this.playerimage = super.getImage(urlplayerimage);
+		System.out.println(playerimage);
+		this.enemyimage = super.getImage(urlenemyimage);
+		this.explosionimage = super.getImage(urlexplosionimage);
+		this.titleimage = super.getImage(urltitleimage);
+		this.apple_logo = super.getImage(urlapple_logo);
+		this.linux_logo = super.getImage(urllinux_logo);
+		this.windows_logo = super.getImage(urlwindows_logo);
+
+		this.tracker.addImage(playerimage, 0);
+		this.tracker.addImage(enemyimage, 0);
+		this.tracker.addImage(explosionimage, 0);
+		this.tracker.addImage(titleimage, 0);
+		this.tracker.addImage(apple_logo, 0);
+		this.tracker.addImage(linux_logo, 0);
+		this.tracker.addImage(windows_logo, 0);
+
+		try{
+			this.tracker.waitForAll();
+			System.out.println("MediaTracker is ok");
+		} catch (InterruptedException e){}
+
+		this.apple_icon = new ImageIcon(apple_logo);
+		this.linux_icon = new ImageIcon(linux_logo);
+		this.windows_icon = new ImageIcon(windows_logo);
+		this.title.setTitleImage(titleimage);
+
 		this.selplayerbutton0 = new JButton(apple_icon);
 		this.selplayerbutton1 = new JButton(linux_icon);
 		this.selplayerbutton2 = new JButton(windows_icon);
@@ -80,6 +111,7 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		this.selmenuplayerlabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 40));
 		this.selmenuenemylabel = new JLabel("Select Enemy");
 		this.selmenuenemylabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 40));
+
 		px = 640;
 		py = 600;
 		point = 0;
@@ -93,22 +125,6 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		isLeft = isRight = isUp = isDown = isShot = false;
 		timer = new Timer(40, this);
 		this.timer.stop();
-
-		urlplayerimage = MyApplet.class.getResource("image/linux_logo.png");
-		urlenemyimage = MyApplet.class.getResource("image/windows_logo.png");
-		urlexplosionimage = MyApplet.class.getResource("image/explosion.png");
-		urltitleimage = MyApplet.class.getResource("image/title/OSBustersTitleImage3.png");
-		urlapple_logo = MyApplet.class.getResource("image/apple_logo.png");
-		urllinux_logo = MyApplet.class.getResource("image/linux_logo.png");
-		urlwindows_logo = MyApplet.class.getResource("image/windows_logo.png");
-
-		this.playerimage = super.getImage(urlplayerimage);
-		this.enemyimage = super.getImage(urlenemyimage);
-		this.explosionimage = super.getImage(urlexplosionimage);
-		this.titleimage = super.getImage(urltitleimage);
-		this.apple_logo = super.getImage(urlapple_logo);
-		this.linux_logo = super.getImage(urllinux_logo);
-		this.windows_logo = super.getImage(urlwindows_logo);
 
 		this.mm = new MyModel();
 		this.mp = new MyPanel(px, py);
@@ -125,7 +141,6 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 			enemy[i].setEnemyImage(enemyimage);
 			enemy[i].setExplosionImage(explosionimage);
 		}
-		this.title = new Title();
 
 		//set_image
 		mp.setPlayerImage(playerimage);
@@ -136,7 +151,6 @@ public class MyApplet extends JApplet implements KeyListener, ActionListener {
 		mp.setNUM_BULLET(NUM_BULLET);
 		mp.setNUM_ENEMY(NUM_ENEMY);
 		mp.setMyModel(this.mm);
-		title.setMyModel(this.mm);
 
 		mp.addKeyListener(this);
 

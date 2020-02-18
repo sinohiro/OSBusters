@@ -73,13 +73,11 @@ public class MyPanel extends JPanel {
 	}
 
 	public MyPanel(int px, int py) {
-		//super();
 		this.px = px;
 		this.py = py;
 		this.ex = ex;
 		this.ey = ey;
 		setBackground(Color.black);
-		//setBackground(Color.white);
 		setPreferredSize(new Dimension(1280, 720));
 	}
 

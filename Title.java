@@ -2,10 +2,10 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Title extends JPanel {
-	private MyModel mm;
+	private Image titleimage;
 
-	public void setMyModel(MyModel mm){
-		this.mm = mm;
+	public void setTitleImage(Image titleimage){
+		this.titleimage = titleimage;
 	}
 
 	public Title() {
@@ -18,7 +18,7 @@ public class Title extends JPanel {
 		super.paintComponent(g);
 		Toolkit.getDefaultToolkit().sync();
 
-		g.drawImage(mm.getTitleImage(), 0, 0, this);
+		g.drawImage(this.titleimage, 0, 0, this);
 
 		requestFocusInWindow();
 	}
